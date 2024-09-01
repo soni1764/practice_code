@@ -2,8 +2,7 @@ import time
 
 import requests
 from selenium import webdriver
-from selenium.webdriver import Keys, ActionChains
-from selenium.webdriver.chrome.options import Options
+from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait
@@ -79,7 +78,7 @@ class Demo:
         print(inpb.is_displayed())
         time.sleep(2)
 
-    def scroll_into_view(self, ele=None):
+    def scroll_into_view(self):
         ele = self.driver.find_element(By.ID, "displayed-text")
         self.driver.execute_script("arguments[0].scrollIntoView()", ele)
         time.sleep(2)
@@ -162,7 +161,7 @@ class Demo:
         self.driver.switch_to.frame(frame)
         more = self.driver.find_element(By.LINK_TEXT, "More")
         self.scroll_into_view2(more)
-        action = self.mouse_hover_reuse(more)
+        self.mouse_hover_reuse(more)
         time.sleep(2)
 
     def table_1(self):
@@ -200,7 +199,7 @@ class Demo:
         total_s = 0
         for row in rows:
             prof = row.find_element(By.XPATH, "td[2]").text
-            if  prof == profession:
+            if prof == profession:
                 name = row.find_element(By.XPATH, "td[1]").text
                 city = row.find_element(By.XPATH, "td[3]").text
                 amt = row.find_element(By.XPATH, "td[4]").text
@@ -239,7 +238,7 @@ class Demo:
         for link in links:
             url = link.get_attribute("href")
             try:
-                response = urlopen(url)
+                urlopen(url)
             except (HTTPError, URLError):
                 print(f"Broken link: {url}")
 
@@ -251,7 +250,7 @@ class Demo:
         for image in images:
             src = image.get_attribute("src")
             try:
-                response = urlopen(src)
+                urlopen(src)
             except (HTTPError, URLError):
                 print(f"Broken image: {src}")
 
