@@ -20,6 +20,16 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Download Chromedriver
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y unzip xvfb libxi6 libgconf-2-4
+          wget -N
+          
+          https://chromedriver.storage.googleapis.com/91.0.4472.101/chromedriver_linux64.zip
+          unzip chromedriver_linux64.zip -d /usr/local/bin/
+          rm chromedriver_linux64.zip
+
       - name: Run tests
         run: |
-          pytest tests/
+          xvfb-run pytest tests/
