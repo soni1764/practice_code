@@ -268,40 +268,53 @@ import aiohttp
 
 
 # -------------------------Multithreading----using ThreadPool-------a collection of thread-----------------------
-import concurrent.futures
-import time
+# import concurrent.futures
+# import time
+#
+#
+# def worker1():
+#     print(f"Hello, starting thread 1")
+#     time.sleep(5)
+#     print("thread 1 completed")
+#
+#
+# def worker2(name):
+#     print(f"Hello {name}, starting thread 2")
+#     time.sleep(3)
+#     print("thread 2 completed")
+#
+#
+# def worker3(a, b):
+#     print(f"Hello, starting thread 3")
+#     time.sleep(2)
+#     print(f"sum of {a} and {b} is {a+b}")
+#     print("thread 3 completed")
+#
+#
+# if __name__ == "__main__":
+#     pool = concurrent.futures.ThreadPoolExecutor(max_workers=5)
+#     pool.submit(worker1)
+#     pool.submit(worker2, "soni")
+#     pool.submit(worker3, 2, 3)
+#
+#     pool.shutdown(wait=True)
+#
+#     print("Main thread continue")
 
 
-def worker1():
-    print(f"Hello, starting thread 1")
-    time.sleep(5)
-    print("thread 1 completed")
+# -----------------------------get text from image------------------------------------------------------------
+import pytesseract
+from PIL import Image
 
 
-def worker2(name):
-    print(f"Hello {name}, starting thread 2")
-    time.sleep(3)
-    print("thread 2 completed")
-
-
-def worker3(a, b):
-    print(f"Hello, starting thread 3")
-    time.sleep(2)
-    print(f"sum of {a} and {b} is {a+b}")
-    print("thread 3 completed")
-
+pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files (x86)\Tesseract-OCR\tesseract.exe'
+image_path = "pic.webp"
+image = Image.open(image_path)
 
 if __name__ == "__main__":
-    pool = concurrent.futures.ThreadPoolExecutor(max_workers=5)
-    pool.submit(worker1)
-    pool.submit(worker2, "soni")
-    pool.submit(worker3, 2, 3)
-
-    pool.shutdown(wait=True)
-
-    print("Main thread continue")
-
-
+    text = pytesseract.image_to_string(image)
+    print(text)
+    print(text[:-1])
 
 
 
