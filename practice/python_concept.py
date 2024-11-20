@@ -237,7 +237,7 @@ import aiohttp
 #
 #     print("done")
 
-# -------------------------Multithreading---------------------------------------------------------------
+# -------------------------Multithreading-------------------------------------------------
 # import threading
 # import time
 #
@@ -266,6 +266,40 @@ import aiohttp
 #
 #     print("done")
 
+
+# -------------------------Multithreading----using ThreadPool-------a collection of thread-----------------------
+import concurrent.futures
+import time
+
+
+def worker1():
+    print(f"Hello, starting thread 1")
+    time.sleep(5)
+    print("thread 1 completed")
+
+
+def worker2(name):
+    print(f"Hello {name}, starting thread 2")
+    time.sleep(3)
+    print("thread 2 completed")
+
+
+def worker3(a, b):
+    print(f"Hello, starting thread 3")
+    time.sleep(2)
+    print(f"sum of {a} and {b} is {a+b}")
+    print("thread 3 completed")
+
+
+if __name__ == "__main__":
+    pool = concurrent.futures.ThreadPoolExecutor(max_workers=5)
+    pool.submit(worker1)
+    pool.submit(worker2, "soni")
+    pool.submit(worker3, 2, 3)
+
+    pool.shutdown(wait=True)
+
+    print("Main thread continue")
 
 
 
