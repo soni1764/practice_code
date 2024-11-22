@@ -1,6 +1,7 @@
 import threading
 
 from selenium import webdriver
+from concurrent.futures import ThreadPoolExecutor
 
 
 def open_browser(url):
@@ -10,10 +11,7 @@ def open_browser(url):
     driver.quit()
 
 
-if __name__ == "__main__":
-    urls = ["https://www.google.com/", "https://www.facebook.com/",
-            "https://www.w3schools.com/"]
-
+def using_thread_method(urls):
     threads = []
     for url in urls:
         thread = threading.Thread(target=open_browser, args=(url,))
@@ -22,4 +20,29 @@ if __name__ == "__main__":
 
     for thread in threads:
         thread.join()
+
+
+def using_thread_pool(urls):
+
+    with ThreadPoolExecutor(max_workers=3) as executor:
+        executor.map(open_browser, urls)
+
+    # pool = ThreadPoolExecutor(max_workers=3)
+    #
+    # for url in urls:
+    #     pool.submit(open_browser, url)
+    # pool.shutdown(wait=True)
+
+
+# if __name__ == "__main__":
+#     urls_ = ["https://www.google.com/", "https://www.facebook.com/",
+#             "https://www.w3schools.com/"]
+#
+#     # using_thread_method(urls_)
+#     using_thread_pool(urls_)
+
+
+
+
+
 
