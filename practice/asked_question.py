@@ -1,4 +1,6 @@
 # 1.----------------------------------------Print all Substring----------------------------------------------------
+from itertools import permutations
+
 
 def print_substring(given_string, n):
     for i in range(n):
@@ -36,13 +38,35 @@ def compare_dict(d1, d2):
         print("Both dictinaries D1 and D2 are different")
 
 
+def compare_dict2(d1, d2):
+    flag = True
+    for key in d1:
+        if key not in d2:
+            print(f"not equal, key {key} not found in d2")
+            flag = False
+        else:
+            if d1[key] != d2[key]:
+                print(f"not equal, key {key} value not equal {key}: value in d1: {d1[key]} and value in d2: {d2[key]}")
+                flag = False
+    for key in d2:
+        if key not in d1:
+            print(f"not equal, key {key} not found in d1")
+            flag = False
+
+    if flag:
+        print("Equals")
+    else:
+        print("Not equals")
+
+
 # if __name__ == '__main__':
 #     dict1 = {"a": 1, "b": 2, "c": 3, "d": 4, "e": 5}
 #     dict2 = {"a": 1, "b": 2, "c": 3, "d": 6, "f": 10}
 #
-#     # dict1 = {"a": 1, "b": 2, "c": 3}
-#     # dict2 = {"a": 1, "b": 2, "c": 3}
-#     compare_dict(dict1, dict2)
+    # dict1 = {"a": 1, "b": 2, "c": 3}
+    # dict2 = {"a": 1, "b": 2, "c": 3}
+#   compare_dict(dict1, dict2)
+#     compare_dict2(dict1, dict2)
 
 
 # ------------------------format_string_with_occurrence---------------------------------------------------------------
@@ -70,10 +94,32 @@ class MyClass:
         print(self.format_string)
 
 
+def format_string_with_occurrence2(given_string, n):
+    formatted_string = ''
+    char_list = []
+    for i in range(n):
+        if i < n - 1:
+            if given_string[i] == given_string[i+1]:
+                char_list.append(given_string[i])
+            else:
+                char_list.append(given_string[i])
+                if i < n - 2:
+                    formatted_string += str(len(char_list)) + given_string[i]
+                    char_list = []
+        else:
+            if given_string[i] == given_string[i-1]:
+                formatted_string += str(len(char_list) + 1) + given_string[i]
+            else:
+                formatted_string += str(len(char_list)) + given_string[i-1] + '1' + given_string[i]
+
+    print(formatted_string)
+
+
 # if __name__ == '__main__':
 #     s = "aaaabbbccadddbbcccf"
 #     mc = MyClass()
 #     mc.format_string_with_occurrence(s, len(s))
+#     format_string_with_occurrence2(s, len(s))
 
 
 # -----------------------------get sum of all numbers in nested list ------------------
@@ -118,20 +164,18 @@ def longest_common_prefix(words):
         print("List is empty")
 
     else:
-        len_first_word = len(words[0])
-        comm_word = ''
+        common_prefix = words[0]
         # getting the shortest word
         for word in words:
-            if len(word) < len_first_word:
-                len_first_word = len(words)
-                comm_word = word
+            if len(word) < len(common_prefix):
+                common_prefix = word
 
-        for i in comm_word:
+        for i in common_prefix:
             for word in words:
-                if comm_word not in word:
-                    comm_word = comm_word[:-1]
+                if common_prefix not in word:
+                    common_prefix = common_prefix[:-1]
 
-        print(comm_word)
+        print(common_prefix)
 
 
 def longest_common_prefix2(words):
@@ -162,10 +206,40 @@ def is_char_present_in_list_element(word, list_):
 
 # if __name__ == '__main__':
 #     w = ["flower", "flow", "floght", "flows"]
-#     longest_common_prefix2(w)
+#     longest_common_prefix(w)
+    # longest_common_prefix2(w)
 
 
-# -----------------------------search all permutaions in given string------------------
+# -----------------------------search all permutaions of a string in given string------------------
+def get_per(a):
+    for p in permutations(a):
+        # print(p)
+        print(''.join(p))
+
+
+def get_per2(a):
+    p = [''.join(p) for p in permutations(a)]
+    print(p)
+
+
+def get_per_of_a_in_b(a, b):
+    perms = [''.join(p) for p in permutations(a)]
+    # ans = [p for p in perms if p in b]
+    # print(ans)
+    for p in perms:
+        if p in b:
+            print(p)
+
+
+# if __name__ == "__main__":
+#     small_str = "abc"
+#     large_str = "cbabadcbbabbcbabaabccbabc"
+# #     get_per(small_str)
+# #     get_per2(small_str)
+#     get_per_of_a_in_b(small_str, large_str)
+
+
+
 def search_all_perm(given_string, string_to_search):
     pass
 
