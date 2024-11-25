@@ -1,45 +1,32 @@
-import threading
-
-from selenium import webdriver
-from concurrent.futures import ThreadPoolExecutor
+from itertools import permutations
 
 
-def open_browser(url):
-    driver = webdriver.Chrome()
-    driver.get(url)
-    print(f"Title for {url} is: {driver.title}")
-    driver.quit()
+def get_per(a):
+    for p in permutations(a):
+        # print(p)
+        print(''.join(p))
 
 
-def using_thread_method(urls):
-    threads = []
-    for url in urls:
-        thread = threading.Thread(target=open_browser, args=(url,))
-        threads.append(thread)
-        thread.start()
-
-    for thread in threads:
-        thread.join()
+def get_per2(a):
+    p = [''.join(p) for p in permutations(a)]
+    print(p)
 
 
-def using_thread_pool(urls):
-
-    with ThreadPoolExecutor(max_workers=3) as executor:
-        executor.map(open_browser, urls)
-
-    # pool = ThreadPoolExecutor(max_workers=3)
-    #
-    # for url in urls:
-    #     pool.submit(open_browser, url)
-    # pool.shutdown(wait=True)
+def get_per_of_a_in_b(a, b):
+    perms = [''.join(p) for p in permutations(a)]
+    # ans = [p for p in perms if p in b]
+    # print(ans)
+    for p in perms:
+        if p in b:
+            print(p)
 
 
-# if __name__ == "__main__":
-#     urls_ = ["https://www.google.com/", "https://www.facebook.com/",
-#             "https://www.w3schools.com/"]
-#
-#     # using_thread_method(urls_)
-#     using_thread_pool(urls_)
+if __name__ == "__main__":
+    small_str = "abc"
+    large_str = "cbabadcbbabbcbabaabccbabc"
+    # get_per(small_str)
+    # get_per2(small_str)
+    get_per_of_a_in_b(small_str, large_str)
 
 
 
