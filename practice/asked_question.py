@@ -1,4 +1,6 @@
 # 1.----------------------------------------Print all Substring----------------------------------------------------
+import os
+import time
 from itertools import permutations
 
 
@@ -239,10 +241,50 @@ def get_per_of_a_in_b(a, b):
 #     get_per_of_a_in_b(small_str, large_str)
 
 
-
 def search_all_perm(given_string, string_to_search):
     pass
 
 
 # if __name__ == "__main__":
 #     search_all_perm("", "")
+
+
+# ----------------------------------program to wait for file in a drive----------------------------------
+def wait_for_file(file_path, interval):
+
+    # while not os.path.exists(file_path):
+    while not os.path.isfile(file_path):
+        time.sleep(interval)
+        print("waiting for file")
+    print("File appeared")
+
+
+if __name__ == "__main__":
+    wait_for_file("test.csv", 2)
+
+
+# ----------------------------------program to get alphanumeric string from list-----------------------------------
+def get_alpha_numeric_string(given_string):
+    an_list = []
+
+    for word in given_string:
+        alpha_flag = False
+        num_flag = False
+
+        if type(word) == str and len(given_string) >= 2:
+            for char in word:
+                if char.isalpha():
+                    alpha_flag = True
+                if char.isdigit():
+                    num_flag = True
+
+            if alpha_flag and num_flag:
+                an_list.append(word)
+
+    print(an_list)
+
+
+# if __name__ == "__main__":
+#     get_alpha_numeric_string([1, "abc12", "abc", "xyz12", "123"])
+
+
