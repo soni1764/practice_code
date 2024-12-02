@@ -1,4 +1,5 @@
 # 1.----------------------------------------Print all Substring----------------------------------------------------
+import itertools
 import os
 import time
 from itertools import permutations
@@ -65,8 +66,8 @@ def compare_dict2(d1, d2):
 #     dict1 = {"a": 1, "b": 2, "c": 3, "d": 4, "e": 5}
 #     dict2 = {"a": 1, "b": 2, "c": 3, "d": 6, "f": 10}
 #
-    # dict1 = {"a": 1, "b": 2, "c": 3}
-    # dict2 = {"a": 1, "b": 2, "c": 3}
+# dict1 = {"a": 1, "b": 2, "c": 3}
+# dict2 = {"a": 1, "b": 2, "c": 3}
 #   compare_dict(dict1, dict2)
 #     compare_dict2(dict1, dict2)
 
@@ -101,7 +102,7 @@ def format_string_with_occurrence2(given_string, n):
     char_list = []
     for i in range(n):
         if i < n - 1:
-            if given_string[i] == given_string[i+1]:
+            if given_string[i] == given_string[i + 1]:
                 char_list.append(given_string[i])
             else:
                 char_list.append(given_string[i])
@@ -109,10 +110,10 @@ def format_string_with_occurrence2(given_string, n):
                     formatted_string += str(len(char_list)) + given_string[i]
                     char_list = []
         else:
-            if given_string[i] == given_string[i-1]:
+            if given_string[i] == given_string[i - 1]:
                 formatted_string += str(len(char_list) + 1) + given_string[i]
             else:
-                formatted_string += str(len(char_list)) + given_string[i-1] + '1' + given_string[i]
+                formatted_string += str(len(char_list)) + given_string[i - 1] + '1' + given_string[i]
 
     print(formatted_string)
 
@@ -129,7 +130,7 @@ def get_sum(nums):
     total = 0
     for ele in nums:
         if isinstance(ele, list):
-        # if type(ele) == type([]):
+            # if type(ele) == type([]):
             total += get_sum(ele)
         else:
             total += ele
@@ -209,7 +210,7 @@ def is_char_present_in_list_element(word, list_):
 # if __name__ == '__main__':
 #     w = ["flower", "flow", "floght", "flows"]
 #     longest_common_prefix(w)
-    # longest_common_prefix2(w)
+# longest_common_prefix2(w)
 
 
 # -----------------------------search all permutaions of a string in given string------------------
@@ -251,7 +252,6 @@ def search_all_perm(given_string, string_to_search):
 
 # ----------------------------------program to wait for file in a drive----------------------------------
 def wait_for_file(file_path, interval):
-
     # while not os.path.exists(file_path):
     while not os.path.isfile(file_path):
         time.sleep(interval)
@@ -259,8 +259,8 @@ def wait_for_file(file_path, interval):
     print("File appeared")
 
 
-if __name__ == "__main__":
-    wait_for_file("test.csv", 2)
+# if __name__ == "__main__":
+#     wait_for_file("test.csv", 2)
 
 
 # ----------------------------------program to get alphanumeric string from list-----------------------------------
@@ -287,4 +287,126 @@ def get_alpha_numeric_string(given_string):
 # if __name__ == "__main__":
 #     get_alpha_numeric_string([1, "abc12", "abc", "xyz12", "123"])
 
+
+# ----------------------------------program to find equilibrium index------------------------------
+def get_equilibrium_index(given_list, n):
+    for i in range(n):
+        left_sum = sum(given_list[:i])
+        right_sum = sum(given_list[i + 1:])
+        if left_sum == right_sum:
+            return f"Equilibrium index is: {i}"
+    return -1
+
+
+def get_equilibrium_index2(given_list, n=0):
+    right_sum = sum(given_list)
+    left_sum = 0
+    for i, num in enumerate(given_list):
+        right_sum -= num
+        if left_sum == right_sum:
+            return f"Equilibrium index is: {i}"
+        left_sum += num
+    return -1
+
+
+# if __name__ == "__main__":
+#     l_ = [-4, 1, 5, 2, -4, 4, 2]
+#     print(get_equilibrium_index(l_, len(l_)))
+#     print(get_equilibrium_index2(l_, len(l_)))
+
+
+# -----------program to find start and end index from list where element sum is equal to given target sum--------------
+
+
+# ----------------------------------find product/combination using itertools--------------------------------------
+def get_product_combination(list1, list2):
+    print(list(itertools.product(list1, list2)))
+
+
+# if __name__ == "__main__":
+#     l1 = [1, 2, 3]
+#     l2 = [4, 5, 6]
+#     get_product_combination(l1, l2)
+
+
+# -------------------------get_count_of_operation_to_make_num_0-----------------------------------------------
+def get_count_of_operation_to_make_num_0(given_string):
+    V = int(given_string, 2)
+    count = 0
+    while V != 0:
+        if V % 2 == 0:
+            V = V // 2
+        else:
+            V = V - 1
+        count += 1
+    return count
+
+
+# if __name__ == "__main__":
+#     c = get_count_of_operation_to_make_num_0('1111010101111')
+#     print(c)
+
+# ------------------------------get shortest balanced fragment (both upper and lower case exist)-----------------
+def shortest_balanced_fragment(S):
+    def is_balanced(sub):
+        lower = set()
+        upper = set()
+        for char in sub:
+            if char.islower():
+                lower.add(char)
+            elif char.isupper():
+                upper.add(char.lower())
+        print(lower, upper)
+        return lower == upper
+
+    n = len(S)
+    min_length = float('inf')
+    # min_length = n
+    result = ""
+
+    for start in range(n):
+        for end in range(start + 1, n + 1):
+            fragment = S[start:end]
+            if is_balanced(fragment):
+                if end - start < min_length:
+                    min_length = end - start
+                    result = fragment
+
+                # if min_len > len(fragment):
+                #     min_len = len(fragment)
+                #     result = fragment
+
+    return len(result) if min_length != float('inf') else -1
+
+
+# if __name__ == "__main__":
+#     # Example usage
+#     S = "CATattac"
+#     print(f"The shortest balanced fragment in '{S}' is '{shortest_balanced_fragment(S)}'")
+
+
+# -------------------------get sum of element in two list at index using lambda and map----------------------------
+def get_sum_at_index(l1, l2):
+    add = lambda a, b: a + b
+    sum_ = list(map(add, l1, l2))
+    print(sum_)
+
+
+# if __name__ == "__main__":
+#     get_sum_at_index([1, 2, 3, 4], [5, 6, 7, 8, 9])
+
+
+# ------------------get all possible palindrome in a string---------------------------------------------
+
+def get_all_palindrome(given_string):
+    n = len(given_string)
+    for start in range(n):
+        for end in range(start + 1, n + 1):
+            sub_string = given_string[start:end]
+            if len(sub_string) > 1 and sub_string == sub_string[::-1]:
+                print(sub_string)
+
+
+# if __name__ == "__main__":
+#     get_all_palindrome("abcacbdcacbab")
 

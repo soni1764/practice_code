@@ -359,3 +359,52 @@ def get_per_of_a_in_b(a, b):
 # #     get_per(small_str)
 # #     get_per2(small_str)
 #     get_per_of_a_in_b(small_str, large_str)
+
+
+# --------------------------call parent class constructor---------------------------
+class Parent:
+    def __init__(self, name):
+        self.name = name
+        print(f"Parent class constructor called. Name: {self.name}")
+
+
+class Child(Parent):
+    def __init__(self, name, age):
+        # Call the parent class constructor
+        super().__init__(name)
+        self.age = age
+        print(f"Child class constructor called. Age: {self.age}")
+
+
+# if __name__ == "__main__":
+#     # Create an instance of Child
+#     child_instance = Child("John", 12)
+
+
+class Parent1:
+    def __init__(self, name):
+        self.name = name
+        print(f"Parent1 class constructor called. Name: {self.name}")
+
+
+class Parent2:
+    def __init__(self, age):
+        self.age = age
+        print(f"Parent2 class constructor called. Age: {self.age}")
+
+
+class Child(Parent1, Parent2):
+    def __init__(self, name, age, grade):
+        # Call the parent class constructors
+        Parent1.__init__(self, name)
+        Parent2.__init__(self, age)
+        self.grade = grade
+        print(f"Child class constructor called. Grade: {self.grade}")
+
+
+# if __name__ == "__main__":
+#     # Create an instance of Child
+#     child_instance = Child("Alice", 14, "8th Grade")
+
+
+
