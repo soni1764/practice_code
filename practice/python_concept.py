@@ -393,7 +393,7 @@ class Parent2:
         print(f"Parent2 class constructor called. Age: {self.age}")
 
 
-class Child(Parent1, Parent2):
+class Child2(Parent1, Parent2):
     def __init__(self, name, age, grade):
         # Call the parent class constructors
         Parent1.__init__(self, name)
@@ -404,7 +404,7 @@ class Child(Parent1, Parent2):
 
 # if __name__ == "__main__":
 #     # Create an instance of Child
-#     child_instance = Child("Alice", 14, "8th Grade")
+#     child_instance = Child2("Alice", 14, "8th Grade")
 
 
 

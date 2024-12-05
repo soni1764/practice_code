@@ -410,3 +410,6 @@ def get_all_palindrome(given_string):
 # if __name__ == "__main__":
 #     get_all_palindrome("abcacbdcacbab")
 
+
+# ------------------next---------------------------------------------
+

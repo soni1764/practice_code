@@ -40,18 +40,26 @@
 
 
 
-class A:
-    def __init__(self, name):
-        self.name = name
-        print(f"A class constructor called. name: {self.name} ")
+def get_substring(s_):
 
-class B(A):
-    def __init__(self, name, age):
-        super().__init__(name)
-        self.age = age
-        print(f"B class constructor called. age: {self.age} ")
+    c_s = set(s_)
+    d = {}
+    for c in s_:
+        if c not in d:
+            d[c] = 1
+        else:
+            d[c] += 1
 
-b = B("soni", 25)
+    for k, v in d.items():
+        if v >= 2:
+            c_s.remove(k)
+    print(c_s, len(c_s))
+
+
+get_substring("ababcde")
+
+
+
 
 
 
