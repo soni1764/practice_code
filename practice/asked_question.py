@@ -411,5 +411,18 @@ def get_all_palindrome(given_string):
 #     get_all_palindrome("abcacbdcacbab")
 
 
-# ------------------next---------------------------------------------
+# ------------------find all index of vowel in a list---------------------------------------------
+def get_all_index(given_list):
+    vowel = "aeiouAEIOU"
+    vowel_dict = {}
+    for idx, char in enumerate(given_list):
+        if char in vowel:
+            if char not in vowel_dict:
+                vowel_dict[char] = []
+            vowel_dict[char].append(idx)
+    print(vowel_dict)
 
+
+# if __name__ == "__main__":
+#     s = "Gourav Soni"
+#     get_all_index(s)
