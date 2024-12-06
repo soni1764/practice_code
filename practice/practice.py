@@ -270,28 +270,27 @@ def is_armstrong(n):
 def get_fibonacci_series(n):
     n1 = 0
     n2 = 1
-    next_ = n1
     while n >= 0:
-        print(next_, end=' ')
+        print(n1, end=' ')
+        nth = n1 + n2
         n1 = n2
-        n2 = next_
-        next_ = n1 + n2
+        n2 = nth
         n -= 1
 
 
 def nth_fibonacci_number(n):
     n1 = 0
     n2 = 1
-    nth_ = 0
+    nth = 0
     while n >= 0:
-        nth_ = n1
-        print(nth_, end=' ')
+        nth = n1
+        print(n1, end=' ')
         next_ = n1 + n2
         n1 = n2
         n2 = next_
         n -= 1
     print()
-    print(nth_)
+    print(nth)
 
 
 def nth_fibonacci_number_rec(n):
@@ -310,9 +309,9 @@ def nth_fibonacci_number_rec(n):
 #     except Exception as e:
 #         print(e)
 #
-#     get_fibonacci_series(num)
-#     nth_fibonacci_number(num)
-#     print(nth_fibonacci_number_rec(num))
+    # get_fibonacci_series(10)
+    # nth_fibonacci_number(10)
+    # print(nth_fibonacci_number_rec(10))
 
 
 # -----------------------pattern------------------------------------------------
@@ -342,8 +341,8 @@ def print_pattern2(n):
 #             num = int(input("Enter a positive number num\n"))
 #     except Exception as e:
 #         print(e)
-#     print_pattern(num)
-#     print_pattern2(num)
+#     print_pattern(5)
+#     print_pattern2(5)
 
 
 # ---------------------------Largest num--------------------------------------------------
@@ -367,12 +366,12 @@ def sec_largest(given_list):
     print(l_n, sec_l_n)
 
 
-def n_sec_largest(given_list, n):
+def n_largest(given_list, n):
     new_l = []
     for i in range(n):
         l_n = given_list[0]
         for num_ in given_list:
-            if num_ < l_n:
+            if num_ > l_n:
                 l_n = num_
         new_l.append(l_n)
         given_list.remove(l_n)
@@ -380,9 +379,9 @@ def n_sec_largest(given_list, n):
 
 
 # if __name__ == '__main__':
-#     get_largest_num([1, 3, 5, 10, 6, 40, 7, 90, 4, 2])
-#     sec_largest([1, 3, 5, 10, 6, 40, 7, 90, 4, 2, 100, 2, 1, 1, 98])
-#     n_sec_largest([1, 3, 5, 10, 6, 40, 7, 90, 4, 11, 100, 16, 9, 8, 98], 3)
+    # get_largest_num([1, 3, 5, 10, 6, 40, 7, 90, 4, 2])
+    # sec_largest([1, 3, 5, 10, 6, 40, 7, 90, 4, 2, 100, 2, 1, 1, 98])
+    # n_largest([1, 3, 5, 10, 6, 40, 7, 90, 4, 11, 100, 16, 9, 8, 98], 3)
 
 
 # ------------------------Reverse string----------------------------------------------------
@@ -456,7 +455,7 @@ def is_Binary(n):
         if d not in [0, 1]:
             return False
         n //= 10
-        return True
+    return True
 
 
 # if __name__ == '__main__':
@@ -467,7 +466,7 @@ def is_Binary(n):
 #             num = int(input("Enter a positive number num\n"))
 #     except Exception as e:
 #         print(e)
-#     print(is_Binary(num))
+#     print(is_Binary(101))
 
 
 # -----------------------------Sum of digit-----------------------------------------------------
@@ -519,7 +518,7 @@ def prime_fac(n):
 #             num = int(input("Enter a positive number num\n"))
 #     except Exception as e:
 #         print(e)
-#     prime_fac(num)
+#     prime_fac(10)
 
 
 # -----------------------Number Is perfect ----sum of factor(except self) == number-----------------------------------
@@ -652,3 +651,5 @@ def dec_bin_rec(n):
 #     dec_bin(10)
 #     print()
 #     dec_bin_rec(10)
+
+
