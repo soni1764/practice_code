@@ -426,3 +426,18 @@ def get_all_index(given_list):
 # if __name__ == "__main__":
 #     s = "Gourav Soni"
 #     get_all_index(s)
+
+
+# -------------------find sorted list---------------------------------------------------------------------
+def sort_list_by_key(given_list):
+    new_list = sorted(given_list, key= lambda d: d['age'], reverse=False)
+    print(new_list)
+
+
+# if __name__ == "__main__":
+#     l = [
+#         {'name': "sourav", 'age': 30},
+#         {'name': "ajay", 'age': 25},
+#         {'name': "vimal", 'age': 28}
+#     ]
+#     sort_list_by_key(l)
