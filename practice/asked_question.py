@@ -173,7 +173,7 @@ def longest_common_prefix(words):
             if len(word) < len(common_prefix):
                 common_prefix = word
 
-        for i in common_prefix:
+        for _ in common_prefix:
             for word in words:
                 if common_prefix not in word:
                     common_prefix = common_prefix[:-1]
@@ -426,3 +426,213 @@ def get_all_index(given_list):
 # if __name__ == "__main__":
 #     s = "Gourav Soni"
 #     get_all_index(s)
+
+
+# -------------------sort list of dict using key---------------------------------------------------------------------
+def sort_list_by_key(given_list):
+    new_list = sorted(given_list, key= lambda d: d['age'], reverse=False)
+    print(new_list)
+
+
+# if __name__ == "__main__":
+#     l = [
+#         {'name': "sourav", 'age': 30},
+#         {'name': "ajay", 'age': 25},
+#         {'name': "vimal", 'age': 28}
+#     ]
+#     sort_list_by_key(l)
+
+
+# -----------------------check if brackets are balanced ---------------------------------
+# input_ = "{{][}}}()[]"
+
+def is_balanced(string_):
+    p_count = 0
+    c_count = 0
+    s_count = 0
+    for char in string_:
+        if char == '(':
+            p_count += 1
+        elif char == ')':
+            p_count -= 1
+            if p_count < 0:
+                return False
+        elif char == '{':
+            c_count += 1
+        elif char == '}':
+            c_count -= 1
+            if c_count < 0:
+                return False
+        elif char == '[':
+            s_count += 1
+        elif char == ']':
+            s_count -= 1
+            if s_count < 0:
+                return False
+
+    return p_count == 0 and c_count == 0 and s_count == 0
+
+
+# if __name__ == "__main__":
+#     s = "({[()]}{})"
+#     res = is_balanced(s)
+#     print(res)
+
+# ----------------------check if brackets are balanced------------------------------------------
+def is_balanced2(s):
+    # Stack to keep track of opening brackets
+    stack = []
+
+    # Dictionary to map closing brackets to opening ones
+    bracket_map = {')': '(', '}': '{', ']': '['}
+
+    # Loop through each character in the string
+    for char in s:
+        # If it's an opening bracket, push it onto the stack
+        if char in bracket_map.values():
+            stack.append(char)
+        # If it's a closing bracket
+        elif char in bracket_map.keys():
+            # Check if the stack is empty or top of the stack doesn't match
+            if not stack or stack[-1] != bracket_map[char]:
+                return False
+            stack.pop()  # Pop the matched opening bracket from the stack
+
+    # If the stack is empty, all brackets matched correctly
+    return not stack
+
+# if __name__ == "__main__":
+# Test cases
+#     print(is_balanced2("()"))  # True
+#     print(is_balanced2("{[()]}"))  # True
+#     print(is_balanced2("([)]"))  # False
+#     print(is_balanced2("{[(])}"))  # False
+#     print(is_balanced2("((()))"))  # True
+#     print(is_balanced2("{[}"))  # False
+
+# --------------------------find duplicate in list--------------------------------------------------
+def get_duplicate(given_list):
+    duplicate_ = []
+    n = len(given_list)
+    for i in range(n):
+        for j in range(i+1, n):
+            if given_list[j] == given_list[i] and given_list[i] not in duplicate_:
+                duplicate_.append(given_list[i])
+    print(duplicate_)
+
+    unique_2= []
+    duplicate_2 = []
+    for i in given_list:
+        if i not in unique_2:
+            unique_2.append(i)
+        elif i not in duplicate_2:
+            duplicate_2.append(i)
+
+    print(unique_2)
+    print(duplicate_2)
+
+# if __name__ == "__main__":
+#     l_ = [1, 2, 4, 5, 5, 6, 7, 8, 8, 9]
+#     get_duplicate(l_)
+
+# -------------------call common method from parent class using subclass-----------------------------------------------------
+class A:
+
+    def method_in_a(self):
+        print("I am from class A")
+
+class B:
+    def method_in_b(self):
+        print("I am from class B")
+
+
+class C(A):
+    def method_in_c(self):
+        # super()
+        print("I am from class C")
+
+    def method_in_a(self):
+        print("I am from class C overwritting A")
+
+    # def method_in_fromA(self):
+    #     super().method_in_a()
+
+# if __name__ == "__main__":
+#     c = C()
+#     c.method_in_a()
+#     A.method_in_a(c)
+
+
+# ----------------------return string in capital using decorator--------------------------------------------------
+def deco_capital(func):
+    def wrapper(*args, **kwargs):
+        res = func(*args, **kwargs)
+        return res.upper()
+        # return func(*args, **kwargs).upper()
+    return wrapper
+
+
+@deco_capital
+def funtest(s):
+
+    return s
+
+
+# if __name__ == "__main__":
+    # r = funtest("accolite")
+
+    # print(r)
+
+
+# -------------------------sort dict of dict using value(inner dict)---------------------------------------------------------
+def sort_by_values_inner(inner_dict):
+    return dict(sorted(inner_dict.items(), key=lambda item: item[1]))
+
+
+def sort_by_values(given_dict):
+    sorted_dict = {key: sort_by_values_inner(value) for key, value in given_dict.items()}
+    print(sorted_dict)
+
+
+def sort_by_values2(given_dict):
+    sorted_dict = {key: dict(sorted(value.items(), key=lambda item: item[1])) for key, value in given_dict.items()}
+
+    print(sorted_dict)
+
+
+def sort_by_values3(given_dict):
+    sorted_dict = dict(
+        map(lambda item: (item[0], dict(sorted(item[1].items(), key=lambda v: v[1]))), given_dict.items()))
+
+    print(sorted_dict)
+
+
+def sort_by_values4(given_dict):
+    sorted_dict = dict(map(lambda item: (item[0], dict(sorted(item[1].items(), key=lambda v: v[1], reverse=True))),
+                           given_dict.items()))
+
+    print(sorted_dict)
+
+
+input_ = {
+    'Nikhil': {'English': 5, 'Maths': 2, 'Science': 14},
+    'Akash': {'English': 15, 'Maths': 7, 'Science': 2},
+    'Akshat': {'English': 5, 'Maths': 50, 'Science': 20}
+
+}
+
+# output_ = {
+#     'Nikhil': {'Maths': 2, 'English': 5, 'Science': 14},
+#     'Akash': {'Science': 2, 'Maths': 7,'English': 15,},
+#     'Akshat': {'English': 5, 'Science': 20, 'Maths': 50}
+
+#     }
+
+
+# if __name__ == "__main__":
+#     sort_by_values(input_)
+#     sort_by_values2(input_)
+#     sort_by_values3(input_)
+#     sort_by_values4(input_)
+
+# ---------------------------------------------------------------------------------------------------

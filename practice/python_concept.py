@@ -12,7 +12,8 @@ import concurrent.futures
 import pytesseract
 from PIL import Image
 from itertools import permutations
-
+from collections import deque
+# from collections import
 
 def my_decorator1(fun):
     def wraaper():
@@ -407,4 +408,199 @@ class Child2(Parent1, Parent2):
 #     child_instance = Child2("Alice", 14, "8th Grade")
 
 
+# ----------------Binary Search----------------------------------
+def binary_search(given_arr, targ):
+    low = 0
+    high = len(given_arr) -1
+    while low <= high:
+        mid = (low + high) // 2
+        if given_arr[mid] == targ:
+            return mid
+        elif given_arr[mid] > targ:
+            high = mid - 1
+        else:
+            low = mid + 1
+    return -1
 
+
+
+# if __name__ == "__main__":
+#     # Example usage
+#     arr = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
+#     target = 7
+#     result = binary_search(arr, target)
+#     if result != -1:
+#         print(f"Element found at index {result}")
+#     else:
+#         print("Element not found")
+
+
+# -----------------------Collections---------------------------------------
+# ---------------named_tuple-----------------
+from collections import namedtuple
+def named_tuple():
+    Soni = namedtuple("Soni", ['a', 'b'])
+    s = Soni(1, 2)
+    print(s.a)
+    print(s.b)
+
+# if __name__ == "__main__":
+#     named_tuple()
+
+
+# ----------------------deque-------------------------
+from collections import deque
+def de_queue():
+    d = deque()
+    d.append(1)
+    d.append(2)
+    d.append(3)
+    print(d.pop())
+    print(d.popleft())
+
+# if __name__ == "__main__":
+#     de_queue()
+
+
+# ----------------------Counter-------------------------
+from collections import Counter
+def Counter_():
+    counts = Counter(['a', 'b', 'a', 'c', 'b', 'b'])
+    print(counts)
+    counts.update(['c'])
+    print(counts)
+
+# if __name__ == "__main__":
+#     Counter_()
+
+
+# ----------------------defaultDict-------------------------
+from collections import defaultdict
+def defaultdict_():
+    d = defaultdict(int)
+    print(d)
+    d['a'] += 1
+    d['b'] += 2
+    print(d)
+
+    d = defaultdict(list)
+    d['a'].append(1)
+    d['c'].append(2)
+    print(d)
+
+# if __name__ == "__main__":
+#     defaultdict_()
+
+
+
+# ----------------------OrderedDict-------------------------
+from collections import OrderedDict
+def OrderedDict_():
+    d = OrderedDict()
+    d['a'] = 1
+    d['b'] = 2
+    d['c'] = 3
+    print(d)
+
+# if __name__ == "__main__":
+#     OrderedDict_()
+
+
+# ----------------------ChainMap-------------------------
+from collections import ChainMap
+def ChainMap_():
+    d1 = {1: 1, 2: 2, 3: 3}
+    d2 = {4: 4, 5: 5, 6: 6}
+    d = ChainMap(d1, d2)
+    print(d[1])
+    print(d[4])
+    print(d)
+
+# if __name__ == "__main__":
+#     ChainMap_()
+
+
+# ----------------------UserDict, UserList, and UserString-------------------------
+from collections import UserDict
+class MyDict:
+    def __setitem__(self, key, value):
+        if not isinstance(key, str):
+            raise KeyError("Keys must be strings")
+        super().__setitem__(key, value)
+
+
+# if __name__ == "__main__":
+#     d = UserDict()
+#     d[1] = 1
+#     print(d)
+
+
+# ---------------------queue-----FIFO-------------------
+from queue import Queue
+def queue_():
+    q = Queue()
+    q.put(1)
+    q.put(2)
+    q.put(3)
+    print(q.get())
+    print(q.get())
+    print(q.get())
+    print(q.empty())
+
+def queue_2():
+    q = deque()
+    q.append(1)
+    q.append(2)
+    q.append(3)
+    print(q.popleft())
+    print(q.popleft())
+    print(q.popleft())
+
+
+def queue_3():
+    q = []
+    q.append(1)
+    q.append(2)
+    q.append(3)
+    print(q.pop(0))
+    print(q.pop(0))
+    print(q.pop(0))
+
+# if __name__ == "__main__":
+#     queue_3()
+
+
+# ---------------------stack-----LIFO-------------------
+from queue import LifoQueue
+def stack_3():
+    stack = LifoQueue()
+    stack.put(1)
+    stack.put(2)
+    stack.put(3)
+    print(stack.empty())
+    print(stack.get())
+    print(stack.get())
+    print(stack.get())
+    print(stack.empty())
+
+def stack_():
+    stack = deque()
+    stack.append(1)
+    stack.append(2)
+    stack.append(3)
+    print(stack.pop)
+    print(stack.pop())
+    print(stack.pop())
+
+
+def stack_2():
+    stack = []
+    stack.append(1)
+    stack.append(2)
+    stack.append(3)
+    print(stack.pop())
+    print(stack.pop())
+    print(stack.pop())
+
+if __name__ == "__main__":
+    stack_3()

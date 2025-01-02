@@ -1,0 +1,15 @@
+
+2024-12-14 00:18:26,965 : INFO : test_get_title : running first test
+2024-12-14 00:18:28,061 : INFO : test_get_title : Google
+2024-12-14 00:40:11,526 : INFO : test_get_title : running first test
+2024-12-14 00:40:12,688 : INFO : test_get_title : Google
+2024-12-14 00:41:47,231 : INFO : test_get_title : running first test
+2024-12-14 00:41:48,174 : INFO : test_get_title : Google
+2024-12-14 00:42:32,906 : INFO : test_get_title : running first test
+2024-12-14 00:44:11,189 : INFO : test_get_title : running first test
+2024-12-14 00:44:12,272 : INFO : test_get_title : Google
+2024-12-14 00:50:28,118 : INFO : test_get_title : running first test
+2024-12-14 00:52:57,460 : INFO : test_get_title : running first test
+2024-12-14 00:53:00,081 : INFO : test_get_title : Google
+2024-12-17 15:41:52,192 : INFO : test_get_title : running first test
+2024-12-17 15:41:55,562 : INFO : test_get_title : Google
