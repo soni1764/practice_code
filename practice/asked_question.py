@@ -5,7 +5,7 @@ import time
 from itertools import permutations
 
 
-def print_substring(given_string, n):
+def print_all_substring(given_string, n):
     for i in range(n):
         temp = ""
         for j in range(i, n):
@@ -15,7 +15,7 @@ def print_substring(given_string, n):
 
 # if __name__ == '__main__':
 #     s = "English"
-#     print_substring(s, len(s))
+#     print_all_substring(s, len(s))
 
 
 # ----------------------------------------Compare two dictionaries----------------------------------------------------
@@ -66,9 +66,9 @@ def compare_dict2(d1, d2):
 #     dict1 = {"a": 1, "b": 2, "c": 3, "d": 4, "e": 5}
 #     dict2 = {"a": 1, "b": 2, "c": 3, "d": 6, "f": 10}
 #
-# dict1 = {"a": 1, "b": 2, "c": 3}
-# dict2 = {"a": 1, "b": 2, "c": 3}
-#   compare_dict(dict1, dict2)
+#     # dict1 = {"a": 1, "b": 2, "c": 3}
+#     # dict2 = {"a": 1, "b": 2, "c": 3}
+#     compare_dict(dict1, dict2)
 #     compare_dict2(dict1, dict2)
 
 
@@ -120,21 +120,21 @@ def format_string_with_occurrence2(given_string, n):
 
 # if __name__ == '__main__':
 #     s = "aaaabbbccadddbbcccf"
-#     mc = MyClass()
-#     mc.format_string_with_occurrence(s, len(s))
+#     # mc = MyClass()
+#     # mc.format_string_with_occurrence(s, len(s))
 #     format_string_with_occurrence2(s, len(s))
 
 
 # -----------------------------get sum of all numbers in nested list ------------------
-def get_sum(nums):
-    total = 0
-    for ele in nums:
-        if isinstance(ele, list):
-            # if type(ele) == type([]):
-            total += get_sum(ele)
-        else:
-            total += ele
-    return total
+# def get_sum(nums):
+#     total = 0
+#     for ele in nums:
+#         if isinstance(ele, list):
+#             # if type(ele) == type([]):
+#             total += get_sum(ele)
+#         else:
+#             total += ele
+#     return total
 
 
 # if __name__ == "__main__":
@@ -237,8 +237,8 @@ def get_per_of_a_in_b(a, b):
 # if __name__ == "__main__":
 #     small_str = "abc"
 #     large_str = "cbabadcbbabbcbabaabccbabc"
-# #     get_per(small_str)
-# #     get_per2(small_str)
+#     get_per(small_str)
+#     get_per2(small_str)
 #     get_per_of_a_in_b(small_str, large_str)
 
 

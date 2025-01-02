@@ -40,23 +40,26 @@
 
 
 
-def get_substring(s_):
+# def get_substring(s_):
+#
+#     c_s = set(s_)
+#     d = {}
+#     for c in s_:
+#         if c not in d:
+#             d[c] = 1
+#         else:
+#             d[c] += 1
+#
+#     for k, v in d.items():
+#         if v >= 2:
+#             c_s.remove(k)
+#     print(c_s, len(c_s))
 
-    c_s = set(s_)
-    d = {}
-    for c in s_:
-        if c not in d:
-            d[c] = 1
-        else:
-            d[c] += 1
 
-    for k, v in d.items():
-        if v >= 2:
-            c_s.remove(k)
-    print(c_s, len(c_s))
+# get_substring("ababcde")
 
 
-get_substring("ababcde")
+# ---------------------------------------------------------------------------
 
 
 
