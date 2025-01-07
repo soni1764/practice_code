@@ -439,10 +439,11 @@ def binary_search(given_arr, targ):
 # ---------------named_tuple-----------------
 from collections import namedtuple
 def named_tuple():
-    Soni = namedtuple("Soni", ['a', 'b'])
+    Soni = namedtuple("list", ['a', 'b'])
     s = Soni(1, 2)
     print(s.a)
     print(s.b)
+
 
 # if __name__ == "__main__":
 #     named_tuple()
@@ -469,6 +470,7 @@ def Counter_():
     print(counts)
     counts.update(['c'])
     print(counts)
+
 
 # if __name__ == "__main__":
 #     Counter_()
@@ -602,5 +604,5 @@ def stack_2():
     print(stack.pop())
     print(stack.pop())
 
-if __name__ == "__main__":
-    stack_3()
+# if __name__ == "__main__":
+#     stack_3()

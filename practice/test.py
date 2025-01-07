@@ -39,7 +39,6 @@
 # print(f"The indices with target sum {target} are: {start} to {end}")
 
 
-
 # def get_substring(s_):
 #
 #     c_s = set(s_)
@@ -61,12 +60,29 @@
 
 # ---------------------------------------------------------------------------
 
+def sort_(value):
+    res = sorted(value, key=lambda v: v['city'])
+    return res
 
 
+def sort_2(value):
+    # res = {k:dict(sorted(v.items(), key=lambda item: item[0])) for k, v in value.items()}
+    # return res
+
+    res = dict(map(lambda item: (item[0], sorted(item[1].items(), key=lambda v: v[1])), value.items()))
+    return res
 
 
+if __name__ == '__main__':
+    input_l = [{"name": 'sourav', "age": 30, 'city': 'gwl'},
+               {"name": 'aman', "age": 35, 'city': 'delhi'},
+               {"name": 'pankaj', "age": 56, 'city': 'beng'}
+               ]
 
-
-
-
-
+    input_d = {
+        'Nikhil': {'English': 5, 'Maths': 2, 'Science': 14},
+        'Akash': {'English': 15, 'Maths': 7, 'Science': 2},
+        'Akshat': {'English': 5, 'Maths': 50, 'Science': 20}
+    }
+    # print(sort_(input_l))
+    print(sort_2(input_d))

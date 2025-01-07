@@ -334,13 +334,13 @@ def print_pattern2(n):
 
 
 # if __name__ == '__main__':
-#     num = 0
-#     try:
-#         num = int(input("Enter num\n"))
-#         while num < 0:
-#             num = int(input("Enter a positive number num\n"))
-#     except Exception as e:
-#         print(e)
+#     # num = 0
+#     # try:
+#     #     num = int(input("Enter num\n"))
+#     #     while num < 0:
+#     #         num = int(input("Enter a positive number num\n"))
+#     # except Exception as e:
+#     #     print(e)
 #     print_pattern(5)
 #     print_pattern2(5)
 

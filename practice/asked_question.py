@@ -126,20 +126,36 @@ def format_string_with_occurrence2(given_string, n):
 
 
 # -----------------------------get sum of all numbers in nested list ------------------
-# def get_sum(nums):
-#     total = 0
-#     for ele in nums:
-#         if isinstance(ele, list):
-#             # if type(ele) == type([]):
-#             total += get_sum(ele)
-#         else:
-#             total += ele
-#     return total
+def get_sum(nums):
+    total = 0
+    for ele in nums:
+        if isinstance(ele, list):
+            # if type(ele) == type([]):
+            total += get_sum(ele)
+        else:
+            total += ele
+    return total
 
 
 # if __name__ == "__main__":
 #     total_ = get_sum([1, 2, 3, [4, 5], 6])
 #     print(total_)
+
+
+# -----------------------------flatten nested list ------------------
+def flatten(given_list, res=[]):
+    for ele in given_list:
+        if isinstance(ele, list):
+            flatten(ele, res)
+        else:
+            res.append(ele)
+    return res
+
+
+# if __name__ == "__main__":
+#     total_ = flatten([1, [2, 3, [4, 5]], 6])
+#     print(total_)
+
 
 # -----------------------------get longest palindrome from string ------------------
 
