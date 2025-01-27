@@ -45,34 +45,30 @@ from tests.conftest import driver
 #         print(payload)
 
 
-
 # def test_first_program(cross_browser):
 #     print("hi1111111111111")
 #     print(cross_browser)
 
 
-
 class TestDemo2(Base):
+    driver = None
 
     # def test_first_program(self):
     #     print("hi1111111111111")
     #     logger = self.get_logger()
     #     logger.info("running first test")
 
-    def test_get_title(self):
-        logger = self.get_logger()
-        logger.info("running first test")
-        self.driver.get("https://www.google.com/")
-        logger.info(self.driver.title)
-        assert self.driver.title == 'Google'
+    # def test_get_title(self):
+    #     logger = self.get_logger()
+    #     logger.info("running first test")
+    #     self.driver.get("https://www.google.com/")
+    #     logger.info(self.driver.title)
+    #     assert self.driver.title == 'Google'
 
     # def test_data(self, testdata):
     #     print(testdata)
 
+
 # def test_get_title(driver_2):
 #     driver_2.get("https://www.google.com/")
 #     assert driver_2.title == 'Google'
-
-
-
-

@@ -16,8 +16,6 @@ class Base:
     # def setup_base(self, driver_):
     #     self.driver = driver_
 
-
-
     def get_logger(self):
         # logger = logging.getLogger(__name__)
         logger_name = inspect.stack()[1][3]

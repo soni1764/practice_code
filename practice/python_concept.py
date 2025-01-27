@@ -13,7 +13,11 @@ import pytesseract
 from PIL import Image
 from itertools import permutations
 from collections import deque
-# from collections import
+from collections import *
+import pandas as pd
+import json
+import openpyxl
+import yaml
 
 def my_decorator1(fun):
     def wraaper():
@@ -71,31 +75,296 @@ def divide_(a, b):
     # if __name__ == "__main__":
     #     divide_(10, 50)
 
-    # ----------------------------read csv---------------------
-    # if __name__ == "__main__":
-    #     with open("test.csv", "r") as file:
-    #         csv_reader = csv.reader(file)
-    #         header = next(csv_reader)
-    #         for row in csv_reader:
-    #             username = row[0]
-    #             password = row[1]
-    #     print(username, password)
 
-    # ---------------------------lamda/map/filter/reduce--------------------------------------
-    # if __name__ == "__main__":
-    #     mul = lambda a: a*a
-    #     even = lambda a: a % 2 == 0
-    #     add = lambda a, b: a + b
-    #     print(mul(2))
-    #     nums = [1, 2, 3, 4, 5, 6]
-    #     print(list(map(mul, nums)))
-    #     print(list(filter(even, list(map(mul, nums)))))
-    #     mul_nums = reduce(add, list(filter(even, list(map(mul, nums)))))
-    #
-    #     print(mul_nums)
+# ----------------------------read txt file---------------------
+def read_text_file():
+    data = [
+        'Name, Age, City',
+        'Alice, 25, New York',
+        'Bob, 30, Los Angeles',
+        'Charlie, 35, Chicago'
+    ]
+    with open("test.txt", mode="w", newline='') as f:
+        # f.writelines(data)
+        for line in data:
+            f.write(line + '\n')
 
-    # -----------------------------shallow/deep/copy---------------------------
-    # if __name__ == "__main__":
+    with open("test.txt", "r") as file:
+        lines = file.readlines()
+        for line in lines:
+            print(line)
+
+
+# if __name__ == "__main__":
+#     read_text_file()
+
+
+# ----------------------------read csv---------------------
+def read_csv_file():
+    data = [
+        ['Name', 'Age', 'City'],
+        ['Alice', 25, 'New York'],
+        ['Bob', 30, 'Los Angeles'],
+        ['Charlie', 35, 'Chicago']
+    ]
+    with open("test.csv", mode="w", newline='') as f:
+        writter = csv.writer(f)
+        writter.writerows(data)
+
+    with open("test.csv", "r") as file:
+        csv_reader = csv.reader(file)
+        header = next(csv_reader)
+        for row in csv_reader:
+            print(row)
+            name = row[0]
+            age = row[1]
+            city = row[2]
+            print(name, age, city)
+
+    # using pandas
+    # df = pd.read_csv('test.csv')
+    # df.head()
+    # df.tail()
+    # df.info()
+    # df.describe()
+
+
+# if __name__ == "__main__":
+#     read_csv_file()
+
+
+# ----------------------------read excel---------------------
+def read_excel_file():
+    workbook = openpyxl.Workbook()
+    sheet = workbook.active
+    data = [
+        ['Name', 'Age', 'City'],
+        ['Alice', 25, 'New York'],
+        ['Bob', 30, 'Los Angeles'],
+        ['Charlie', 35, 'Chicago']
+    ]
+    for row in data:
+        sheet.append(row)
+    workbook.save("test.xlsx")
+
+    workbook = openpyxl.load_workbook("test.xlsx")
+    sheet = workbook.active
+    print(sheet.cell(1, 1).value)
+    print(sheet.cell(1, 2).value)
+    rows = sheet.max_row
+    cols = sheet.max_column
+    print(rows, cols)
+    for i in range(1, rows + 1):
+        for c in range(1, cols + 1):
+            print(sheet.cell(i, c).value)
+
+    for row in sheet.iter_rows(values_only=True):
+        print(row)
+        print(row[0], row[1])
+
+
+    # using pandas
+    # df = pd.read_excel('test.xlsx')
+    # df.head()
+    # df.tail()
+    # df.info()
+    # df.describe()
+
+
+# if __name__ == "__main__":
+#     read_excel_file()
+
+
+def read_json_file():
+    d = {
+        "data":
+            [
+                {
+                    "name": "Gourav",
+                    "id": 123
+                },
+                {
+                    "name": "Sanjay",
+                    "id": 1234
+                },
+                {
+                    "name": "Prakash",
+                    "id": 1235
+                }
+            ]
+    }
+
+    with open("test.json", "w") as f:
+        json.dump(d, f, indent=4)
+
+    with open("test.json", "r") as f:
+        data = json.load(f)
+        print(data)
+        print(type(data))
+
+    # Using pandas
+    # df = pd.read_json('your_file.json')
+    # print(df.head())
+
+
+# if __name__ == "__main__":
+#     read_json_file()
+
+
+# -----------------------------read xml----------------------------------
+def read_xml_file():
+    items = [
+        {'Name': 'Alice', 'Age': '25', 'City': 'New York'},
+        {'Name': 'Bob', 'Age': '30', 'City': 'Los Angeles'},
+        {'Name': 'Charlie', 'Age': '35', 'City': 'Chicago'}
+    ]
+    import xml.etree.ElementTree as et
+    root = et.Element('data')
+    # Add items to the root element
+    for item in items:
+        person = et.SubElement(root, 'person')
+        for key, value in item.items():
+            child = et.SubElement(person, key)
+            child.text = value
+
+    tree = et.ElementTree(root)
+    tree.write('test.xml')
+
+    # Parse the XML file
+    tree_ = et.parse('test.xml')
+    root_ = tree_.getroot()
+
+    # Iterate through the elements and print them
+    for child in root_:
+        print(child.tag, child.attrib)
+        for sub_child in child:
+            print('  ', sub_child.tag, sub_child.text)
+
+
+# if __name__ == "__main__":
+#     read_xml_file()
+
+
+# ----------------------serialize and deserialize-------------------------
+def serialization_des():
+    # Sample data to serialize
+    data = {
+        'Name': 'Alice',
+        'Age': 25,
+        'City': 'New York'
+    }
+    # serialization sing pickle
+    # Serialize the data to a file
+    with open('test.pkl', 'wb') as f:
+        pickle.dump(data, f)
+
+    with open('test.pkl', 'br') as f:
+        d = pickle.load(f)
+        print(d)
+
+    print()
+    # serialization sing JSON
+    json_string = json.dumps(data)
+    # Write the JSON string to a file
+    with open('test.json', 'w') as file:
+        file.write(json_string)
+
+    with open('test.json', 'r') as file:
+        json_string = file.read()
+    d = json.loads(json_string)
+    print(d)
+
+    print()
+    # serialization sing YAML
+    # Serialize the data to a YAML string
+    yaml_string = yaml.dump(data)
+
+    with open('test.yaml', 'w') as f:
+        f.write(yaml_string)
+
+    with open('test.yaml', 'r') as file:
+        json_string = file.read()
+    d = yaml.safe_load(json_string)
+    print(d)
+
+
+# if __name__ == "__main__":
+#     serialization_des()
+
+
+# -------------------------generator----------------------------
+def exm_gen():
+    yield 1
+    yield 2
+    yield 3
+
+
+def exm_gen2(n):
+    for i in range(n):
+        yield i
+
+
+def feb_gen(n):
+    a, b = 0, 1
+
+    for _ in range(n):
+        yield a
+        a, b = b, a+b
+
+
+if __name__ == "__main__":
+    # g = exm_gen()
+    # g = exm_gen2(10)
+    g = feb_gen(10)
+    print(next(g))
+    for i in g:
+        print(i)
+
+
+# ---------------------------lamda/map/filter/reduce--------------------------------------
+def lambda_map_filter_reduce():
+    mul = lambda a: a*a
+    even = lambda a: a % 2 == 0
+    add = lambda a, b: a + b
+
+    map_list = list(map(mul, [1, 2, 3, 4, 5, 6]))
+    print(map_list)
+
+    filter_list = list(filter(even, map_list))
+    print(filter_list)
+
+    reduce_list = reduce(add, filter_list)
+    print(reduce_list)
+
+    print(reduce(lambda a, b: a+b,
+                 list(filter(lambda a: a % 2 == 0,
+                             list(map(lambda a: a * a, [1, 2, 3, 4, 5, 6]))))))
+
+
+# if __name__ == "__main__":
+#     lambda_map_filter_reduce()
+
+
+# ---------------------------all any--------------------------------------
+def all_any():
+    bool_list = [False, False, True, False]
+    any_status = any(bool_list)
+    all_status = all(bool_list)
+    print(any_status, all_status)
+
+    numbers = [1, 2, 3, 4, 5]
+    numbers2 = [1, 2, 3, 4, -5]
+    all_positive = all(i > 0 for i in numbers)
+    any_negative = any(i < 0 for i in numbers)
+    print(all_positive, any_negative)
+
+
+# if __name__ == "__main__":
+#     all_any()
+
+
+# -----------------------------shallow/deep/copy---------------------------
+def shallow_deep():
     original_copy = [[1, 2, 3], [4, 5, 6]]
     shallow_c = copy.copy(original_copy)
 
@@ -112,22 +381,28 @@ def divide_(a, b):
     print(original_copy)
     print(deep_c)
 
+# if __name__ == "__main__":
+#     shallow_deep()
+
 
 # ----------------------------pickle/unpickle--------------------------------
+def pickle_unpickle():
+        data = {'name': 'Alice', 'age': 30, 'city': 'New York'}
+
+        with open("data.pkl", 'wb') as f:
+            # serialize
+            pickle.dump(data, f)
+
+        with open("data.pkl", "rb") as f:
+            # deserialize
+            d = pickle.load(f)
+            print(d)
+
 # if __name__ == "__main__":
-#     data = {'name': 'Alice', 'age': 30, 'city': 'New York'}
-#
-#     with open("data.pkl", 'wb') as f:
-#         # serialize
-#         pickle.dump(data, f)
-#
-#     with open("data.pkl", "rb") as f:
-#         # deserialize
-#         d = pickle.load(f)
-#         print(d)
+#     pickle_unpickle()
 
 
-# ---------------------------------asyn call---------------------
+# -----------------------------synchronization----asyn call---------------------
 def fetch1(url):
     response = requests.get(url)
     return response.text
@@ -253,6 +528,9 @@ def task2(name):
     print("process 2 completed")
 
 
+def square(n):
+    return n*n
+
 # if __name__ == '__main__':
 #     p1 = multiprocessing.Process(target=task1, args=("Soni",))
 #     p2 = multiprocessing.Process(target=task2, args=("Gourav",))
@@ -264,6 +542,11 @@ def task2(name):
 #     p2.join()
 #
 #     print("done")
+
+    # nums = [1, 2, 3, 4, 5]
+    # with multiprocessing.Pool(processes=4) as p:
+    #     result = p.map(square, nums)
+    #     print(result)
 
 # -------------------------Multithreading-------------------------------------------------
 def task3(name):
@@ -323,14 +606,17 @@ def worker3(a, b):
 
 
 # -----------------------------get text from image------------------------------------------------------------
-pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files (x86)\Tesseract-OCR\tesseract.exe'
-image_path = "pic.webp"
-image = Image.open(image_path)
+def read_text_from_img():
+    pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files (x86)\Tesseract-OCR\tesseract.exe'
+    image_path = "pic.webp"
+    image = Image.open(image_path)
+    text = pytesseract.image_to_string(image)
+    print(text)
+    print(text[:-1])
+
 
 # if __name__ == "__main__":
-#     text = pytesseract.image_to_string(image)
-#     print(text)
-#     print(text[:-1])
+#     read_text_from_img()
 
 
 # -----------------------------get permutation of a in b------------------------------------------------------------

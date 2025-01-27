@@ -1,2 +1,4 @@
-username, password
-verint, 123
+Name,Age,City
+Alice,25,New York
+Bob,30,Los Angeles
+Charlie,35,Chicago

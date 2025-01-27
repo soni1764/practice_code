@@ -13,3 +13,7 @@
 2024-12-14 00:53:00,081 : INFO : test_get_title : Google
 2024-12-17 15:41:52,192 : INFO : test_get_title : running first test
 2024-12-17 15:41:55,562 : INFO : test_get_title : Google
+2025-01-20 12:52:18,602 : INFO : test_get_title : running first test
+2025-01-20 12:52:20,949 : INFO : test_get_title : Google
+2025-01-20 12:53:23,209 : INFO : test_get_title : running first test
+2025-01-20 12:53:25,523 : INFO : test_get_title : Google

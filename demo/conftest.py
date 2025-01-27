@@ -52,12 +52,14 @@ def payload():
 def cross_browser(request):
     return request.param
 
+
 @pytest.fixture(scope="class")
 def driver_(request):
     driver = webdriver.Chrome()
     request.cls.driver = driver
     yield
     driver.quit()
+
 
 @pytest.fixture(params=["chrome", "firefox", "ie"])
 def driver_2(request):

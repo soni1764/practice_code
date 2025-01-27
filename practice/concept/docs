@@ -1,0 +1,33 @@
+------------------------------API--------------------------------------------------
+1. HTTP Basic Authentication
+Description: This method involves sending a username and password encoded in Base64 in the request header.
+Use Case: Simple and straightforward, but not very secure unless used over HTTPS.
+Example: Authorization: Basic bG9sOnNlY3VyZQ==
+
+2. API Key Authentication
+Description: An API key is a unique identifier that a client includes in requests to authenticate themselves.
+Use Case: Commonly used for identifying the calling project, but should be used with HTTPS to ensure security.
+Example: GET /endpoint?api_key=your_api_key
+
+3. Bearer Token Authentication
+Description: Involves using a token (often a JWT) that is included in the request header.
+Use Case: More secure than basic authentication, often used in OAuth 2.0.
+Example: Authorization: Bearer your_token
+
+4. OAuth 2.0
+Description: A more complex and secure method that involves obtaining an access token through an authorization server.
+Use Case: Ideal for scenarios where third-party applications need to access user data without exposing user credentials.
+Example: Authorization: Bearer your_access_token
+
+5. JWT (JSON Web Token) Authentication
+Description: A compact, URL-safe token that contains claims about the user and is signed to ensure integrity.
+Use Case: Stateless and scalable, often used in modern web applications.
+Example: Authorization: Bearer your_jwt_token
+
+6. Digest Authentication
+Description: Similar to basic authentication but more secure as it uses a challenge-response mechanism to prevent replay attacks.
+Use Case: Less common but useful in scenarios where security is a concern and HTTPS is not available.
+
+7. Mutual TLS (mTLS)
+Description: Both the client and server authenticate each other using certificates.
+Use Case: Highly secure, used in environments where both parties need to verify each other's identity.

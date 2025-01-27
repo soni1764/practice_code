@@ -280,24 +280,23 @@ def wait_for_file(file_path, interval):
 
 
 # ----------------------------------program to get alphanumeric string from list-----------------------------------
-def get_alpha_numeric_string(given_string):
-    an_list = []
+def is_alnum(string_):
+    for char in string_:
+        if not (char.isdigit() or char.isalpha()):
+            return False
+    return True
 
-    for word in given_string:
-        alpha_flag = False
-        num_flag = False
 
-        if type(word) == str and len(given_string) >= 2:
-            for char in word:
-                if char.isalpha():
-                    alpha_flag = True
-                if char.isdigit():
-                    num_flag = True
-
-            if alpha_flag and num_flag:
-                an_list.append(word)
-
-    print(an_list)
+def get_alpha_num_string(list_):
+    an = []
+    # for word in list_:
+    #     if type(word) == str and len(word) >=2:
+    #         # if word.isalnum():
+    #         #     print(word, end=', ')
+    #         if is_alnum(word):
+    #             an.append(word)
+    an = [word for word in list_ if type(word) == str and len(word) >=2 if is_alnum(word)]
+    print(an)
 
 
 # if __name__ == "__main__":
@@ -329,6 +328,34 @@ def get_equilibrium_index2(given_list, n=0):
 #     l_ = [-4, 1, 5, 2, -4, 4, 2]
 #     print(get_equilibrium_index(l_, len(l_)))
 #     print(get_equilibrium_index2(l_, len(l_)))
+
+# -----------------------------get start and end index for target sum----------------------------------------
+def find_indices_with_target_sum(nums, target):
+    current_sum = 0
+    start_index = 0
+    index_map = {}
+
+    for end_index, num in enumerate(nums):
+        current_sum += num
+
+        while current_sum > target and start_index <= end_index:
+            current_sum -= nums[start_index]
+            start_index += 1
+
+        if current_sum == target:
+            return start_index, end_index
+
+        index_map[current_sum] = end_index
+
+    return -1, -1
+
+
+# # Example usage
+# nums = [1, 2, 3, 7, 5]
+# # target = 12
+# target = 5
+# start, end = find_indices_with_target_sum(nums, target)
+# print(f"The indices with target sum {target} are: {start} to {end}")
 
 
 # -----------program to find start and end index from list where element sum is equal to given target sum--------------
@@ -372,7 +399,7 @@ def shortest_balanced_fragment(S):
                 lower.add(char)
             elif char.isupper():
                 upper.add(char.lower())
-        print(lower, upper)
+        # print(lower, upper)
         return lower == upper
 
     n = len(S)
@@ -391,7 +418,7 @@ def shortest_balanced_fragment(S):
                 # if min_len > len(fragment):
                 #     min_len = len(fragment)
                 #     result = fragment
-
+    print(result)
     return len(result) if min_length != float('inf') else -1
 
 
@@ -553,30 +580,45 @@ def get_duplicate(given_list):
 
 # -------------------call common method from parent class using subclass-----------------------------------------------------
 class A:
+    # def __init__(self):
+    #     print("class A constructor")
+    #     # print(msg)
 
-    def method_in_a(self):
-        print("I am from class A")
+    def method_A(self):
+        print("class A method")
 
-class B:
-    def method_in_b(self):
-        print("I am from class B")
+    def common(self):
+        print("class A common method")
+
+class B(A):
+    # def __init__(self):
+    #     # super().__init__()
+    #     print("class B constructor")
+
+    def method_B(self):
+        print("class B method")
+
+    def common(self):
+        print("class B common method")
+
+class C(B):
+    # def __init__(self):
+    #     # super().__init__()
+    #     print("class C constructor")
+
+    def method_C(self):
+        print("class C method")
+
+    def common(self):
+        print("class C common method")
 
 
-class C(A):
-    def method_in_c(self):
-        # super()
-        print("I am from class C")
-
-    def method_in_a(self):
-        print("I am from class C overwritting A")
-
-    # def method_in_fromA(self):
-    #     super().method_in_a()
-
-# if __name__ == "__main__":
+# a = A("ellow")
+# if __name__ == '__main__':
 #     c = C()
-#     c.method_in_a()
-#     A.method_in_a(c)
+#     c.common()
+#     super(C, c).common()
+#     super(B, c).common()
 
 
 # ----------------------return string in capital using decorator--------------------------------------------------
@@ -651,4 +693,78 @@ input_ = {
 #     sort_by_values3(input_)
 #     sort_by_values4(input_)
 
-# ---------------------------------------------------------------------------------------------------
+# -----------------------get sliding max of 3 nums from list---------------------------------------
+def get_sliding_max_of_3_num(nums, k):
+    l = []
+    for i in range(len(nums)-k+1):
+        l.append(max(nums[i:i+k]))
+    print(l)
+    # or
+    print([max(nums[i:i + k]) for i in range(len(nums)-k+1)])
+
+
+# if __name__ == '__main__':
+#     get_sliding_max_of_3_num([1, -2, 2, 3, 3, 4, 5, 3, 4, 1, -1, 7], 3)
+
+
+# -------------------add two nums(are in string) and handle carry as we do in math-----------------------
+def add_two_nums_from_string_using_carry(n1, n2):
+    max_l = max(len(n1), len(n2))
+    n1 = n1.zfill(max_l)
+    n2 = n2.zfill(max_l)
+    print(n1, n2)
+    res = ''
+    carry = 0
+    for i in range(max_l-1, -1, -1):
+
+        digit_sum = int(n1[i]) + int(n2[i]) + carry
+        carry = digit_sum // 10
+        res = str(digit_sum % 10) + res
+
+    if carry:
+        res = str(carry) + res
+    print(res)
+
+
+#without adding zero in starting
+def add_two_nums_from_string_using_carry2(n1, n2):
+    res = ''
+    carry = 0
+    i, j = len(n1)-1, len(n2)-1
+    while i >= 0 or j >= 0 or carry:
+        digit1 = int(n1[i]) if i >= 0 else 0
+        digit2 = int(n2[j]) if j >= 0 else 0
+
+        digit_sum = digit1 + digit2 + carry
+        carry = digit_sum // 10
+
+        res = str(digit_sum % 10) + res
+        i -= 1
+        j -= 1
+    print(res)
+
+
+# if __name__ == '__main__':
+#     add_two_nums_from_string_using_carry('1018', '109')
+
+# ----------------------How to download a file in python-----------------------------------
+import requests
+
+def download_file(url, local_filename):
+    # Send a GET request to the URL
+    with requests.get(url, stream=True) as response:
+        response.raise_for_status()  # Check if the request was successful
+        # Open a local file with write-binary mode
+        with open(local_filename, 'wb') as file:
+            # Write the content to the local file in chunks
+            for chunk in response.iter_content(chunk_size=8192):
+                file.write(chunk)
+    print(f"Downloaded {local_filename}")
+
+# Example usage
+url = "https://example.com/path/to/file"
+local_filename = "downloaded_file.ext"
+download_file(url, local_filename)
+
+
+

@@ -283,14 +283,14 @@ def using_thread_method(urls):
 
 
 def using_thread_pool(urls):
-    with ThreadPoolExecutor(max_workers=3) as executor:
-        executor.map(open_browser, urls)
+    # with ThreadPoolExecutor(max_workers=3) as executor:
+    #     executor.map(open_browser, urls)
 
-    # pool = ThreadPoolExecutor(max_workers=3)
-    #
-    # for url in urls:
-    #     pool.submit(open_browser, url)
-    # pool.shutdown(wait=True)
+    pool = ThreadPoolExecutor(max_workers=3)
+
+    for url in urls:
+        pool.submit(open_browser, url)
+    pool.shutdown(wait=True)
 
 
 if __name__ == "__main__":
